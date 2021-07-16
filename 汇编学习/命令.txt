@@ -10,6 +10,10 @@ xcrun --sdk iphoneos clang -S -arch arm64 Demo.m
 xcrun --sdk iphoneos clang -S -arch arm64 helloworld.c
 
 
+你分别用编译优化参数 -O -O2 -O3等，你会发现世界大不同。
+clang -S -O3 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk chap2.12.c
+clang -S -O -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk chap2.12.c
+
 
 参考网址
 https://mp.weixin.qq.com/s?__biz=MzU2NjU5NzMwNA==&mid=2247483658&idx=1&sn=4d0ed61b7ba6d3e53a9894e3745a69eb&scene=21#wechat_redirect
