@@ -7,15 +7,15 @@ _main:                                  ; @main
 ; %bb.0:
 	sub	sp, sp, #16             ; =16
 	.cfi_def_cfa_offset 16
+								; 在链接的过程中, 会将其他源代码中的a符号放入GOT表, 让a符号可以被全局访问到。
 	str	wzr, [sp, #12]
-	
-	mov	w8, #1
-	str	w8, [sp, #8]
-	ldr	w8, [sp, #8]
-	cbz	w8, LBB0_2
-; %bb.1:
-LBB0_2:
-	ldr	w0, [sp, #12]
+	adrp	x8, _a@GOTPAGE      ; 通过GOT的方式来查找a
+	ldr	x8, [x8, _a@GOTPAGEOFF]
+	ldr	w9, [x8]
+	add	w10, w9, #1             ; =1
+	str	w10, [x8]
+	mov	x0, x9
+
 	add	sp, sp, #16             ; =16
 	ret
 	.cfi_endproc
