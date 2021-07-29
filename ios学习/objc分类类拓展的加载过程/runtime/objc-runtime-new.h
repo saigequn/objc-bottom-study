@@ -2118,6 +2118,7 @@ struct objc_class : objc_object {
 
     // Get the class's mangled name, or NULL if the class has a lazy
     // name that hasn't been created yet.
+    // 如果已经初始化 - 从ro取
     const char *nonlazyMangledName() const {
         return bits.safe_ro()->getName();
     }
@@ -2131,6 +2132,7 @@ struct objc_class : objc_object {
         if (!result) {
             // This class lazily instantiates its name. Emplace and
             // return it.
+            // 否则从machO 数据中读取数据
             result = installMangledNameForLazilyNamedClass();
         }
 
